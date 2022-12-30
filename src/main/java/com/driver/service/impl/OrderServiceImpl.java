@@ -28,9 +28,8 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderDto updateOrderDetails(String orderId, OrderDto order) throws Exception {
-        long id=Long.parseLong(orderId);
-        OrderEntity orderEntity=orderRepository.findById(id).get();
-        OrderEntity newEntity=OrderEntity.builder().id(orderEntity.getId()).orderId(order.getOrderId()).cost(order.getCost())
+        OrderEntity orderEntity=orderRepository.findByOrderId(orderId);
+        OrderEntity newEntity=OrderEntity.builder().id(orderEntity.getId()).orderId(orderEntity.getOrderId()).cost(order.getCost())
                 .items(order.getItems()).userId(order.getUserId()).status(order.isStatus()).build();
         orderRepository.save(newEntity);
         return OrderConverter.entityTodto(newEntity);

@@ -34,10 +34,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto updateUser(String userId, UserDto user) throws Exception {
-        long id=Long.parseLong(userId);
-        UserEntity userEntity=userRepository.findById(id).get();
+        UserEntity userEntity=userRepository.findByUserId(userId);
         UserEntity newEntity=UserEntity.builder()
-                .id(userEntity.getId()).userId(user.getUserId()).firstName(user.getFirstName())
+                .id(userEntity.getId()).userId(userEntity.getUserId()).firstName(user.getFirstName())
                 .lastName(user.getLastName()).email(user.getEmail()).build();
         userRepository.save(newEntity);
         return UserConverter.entityToDto(newEntity);

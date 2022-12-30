@@ -24,37 +24,39 @@ public class FoodServiceImpl implements FoodService {
 
     @Override
     public FoodDto getFoodById(String foodId) throws Exception {
-        try {
-            if(!foodRepository.existsByFoodId(foodId)) throw new Exception("FoodID is not present");
-        }catch (Exception e){
-            System.out.println(e);
-        }
+//        try {
+//            if(!foodRepository.existsByFoodId(foodId)) throw new Exception("FoodID is not present");
+//        }catch (Exception e){
+//            System.out.println(e);
+//        }
         FoodEntity foodEntity=foodRepository.findByFoodId(foodId);
         return FoodConverter.entityToDto(foodEntity);
     }
 
     @Override
     public FoodDto updateFoodDetails(String foodId, FoodDto foodDetails) throws Exception {
-        try {
-            if(!foodRepository.existsByFoodId(foodId)) throw new Exception("FoodID is not present");
-        }catch (Exception e){
-            System.out.println(e);
-        }
-        foodDetails.setFoodId(foodId);
+//        try {
+//            if(!foodRepository.existsByFoodId(foodId)) throw new Exception("FoodID is not present");
+//        }catch (Exception e){
+//            System.out.println(e);
+//        }
         FoodEntity foodEntity=foodRepository.findByFoodId(foodId);
-        foodEntity=FoodConverter.dtoToEntity(foodDetails);
-        foodRepository.save(foodEntity);
-        return FoodConverter.entityToDto(foodEntity);
+        FoodEntity newEntity=FoodEntity.builder()
+                .id(foodEntity.getId()).foodId(foodEntity.getFoodId()).foodName(foodDetails.getFoodName())
+                .foodPrice(foodDetails.getFoodPrice())
+                .foodCategory(foodDetails.getFoodCategory()).build();
+        foodRepository.save(newEntity);
+        return FoodConverter.entityToDto(newEntity);
     }
 
     @Override
     public void deleteFoodItem(String id) throws Exception {
         Long Id=Long.parseLong(id);
-        try {
-            if(!foodRepository.existsById(Id)) throw new Exception("ID is not present");
-        }catch (Exception e){
-            System.out.println(e);
-        }
+//        try {
+//            if(!foodRepository.existsById(Id)) throw new Exception("ID is not present");
+//        }catch (Exception e){
+//            System.out.println(e);
+//        }
         foodRepository.deleteById(Id);
     }
 
