@@ -45,8 +45,9 @@ public class OrderController {
 	
 	@DeleteMapping(path = "/{id}")
 	public OperationStatusModel deleteOrder(@PathVariable String id) throws Exception {
+		OperationStatusModel operationStatusModel=new OperationStatusModel();
 		orderService.deleteOrder(id);
-		return null;
+		return operationStatusModel;
 	}
 	
 	@GetMapping()

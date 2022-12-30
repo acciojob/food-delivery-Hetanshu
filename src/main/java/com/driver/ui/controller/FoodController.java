@@ -40,14 +40,16 @@ public class FoodController {
 
 	@PutMapping(path="/{id}")
 	public FoodDetailsResponse updateFood(@PathVariable String id, @RequestBody FoodDetailsRequestModel foodDetails) throws Exception{
-		FoodDto foodDto=foodService.updateFoodDetails(id,FoodConverter.requestToDto(foodDetails));
+		FoodDto foodDto=FoodDto.builder().foodId(id).foodName(foodDetails.getFoodName()).foodPrice(foodDetails.getFoodPrice()).foodCategory(foodDetails.getFoodCategory()).build();
+		foodDto=foodService.updateFoodDetails(id,foodDto);
 		return FoodConverter.dtoToResponse(foodDto);
 	}
 
 	@DeleteMapping(path = "/{id}")
 	public OperationStatusModel deleteFood(@PathVariable String id) throws Exception{
+		OperationStatusModel obj=new OperationStatusModel();
 		foodService.deleteFoodItem(id);
-		return null;
+		return obj;
 	}
 	
 	@GetMapping()

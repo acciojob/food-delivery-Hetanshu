@@ -46,8 +46,9 @@ public class UserController {
 
 	@DeleteMapping(path = "/{id}")
 	public OperationStatusModel deleteUser(@PathVariable String id) throws Exception{
+		OperationStatusModel operationStatusModel=new OperationStatusModel();
 		userService.deleteUser(id);
-		return null;
+		return operationStatusModel;
 	}
 	
 	@GetMapping()

@@ -10,8 +10,8 @@ import com.driver.io.entity.FoodEntity;
 @Repository
 public interface FoodRepository extends CrudRepository<FoodEntity, Long> {
 	FoodEntity findByFoodId(String foodId);
-
-	boolean existsByFoodId(String foodId);
+//
+//	boolean existsByFoodId(String foodId);
 
 //	@Modifying
 //	@Query("update FoodEntity s set s.foodId = :#{#food.foodId}, " +
