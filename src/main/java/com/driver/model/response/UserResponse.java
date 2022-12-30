@@ -5,12 +5,14 @@ import lombok.*;
 
 @NoArgsConstructor
 @Builder
+@AllArgsConstructor
 public class UserResponse {
 
 	private String userId;
 	private String email;
 	private String firstName;
 	private String lastName;
+
 
 	public String getUserId() {
 		return userId;
