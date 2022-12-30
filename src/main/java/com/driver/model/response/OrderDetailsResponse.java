@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 
 @Builder
 @NoArgsConstructor
-@AllArgsConstructor
 public class OrderDetailsResponse {
 
 	private String orderId;
